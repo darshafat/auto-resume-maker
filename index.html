@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Resume Maker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <div class="container">
+        <h1>Create Your Resume</h1>
+        
+        <form id="resumeForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" placeholder="Your Name">
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Your Email">
+            
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" placeholder="Your Phone">
+            
+            <label for="experience">Experience:</label>
+            <textarea id="experience" placeholder="Your Work Experience"></textarea>
+            
+            <label for="education">Education:</label>
+            <textarea id="education" placeholder="Your Education"></textarea>
+            
+            <label for="skills">Skills:</label>
+            <textarea id="skills" placeholder="Your Skills"></textarea>
+
+            <button type="submit">Generate Resume</button>
+        </form>
+        
+        <div id="resumePreview" class="resume-preview">
+            <h2>Resume Preview</h2>
+            <div id="resumeContent"></div>
+            <button id="downloadBtn" style="display:none;">Download as PDF</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
