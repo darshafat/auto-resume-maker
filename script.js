@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to generate PDF
     document.getElementById("downloadBtn").addEventListener("click", function () {
 
-        // Check if jsPDF is loaded correctly
+        // Ensure jsPDF is correctly loaded
         if (typeof jsPDF === 'undefined') {
             alert("jsPDF is not loaded correctly.");
             return;
@@ -49,13 +49,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // Get the content from the resume preview area (plain text)
+        // Capture the content of the resume (without HTML tags, using innerText)
         const resumeContent = document.getElementById("resumeContent").innerText;
 
-        // Use jsPDF to add the content to the PDF
+        // Add the content to the PDF (text format)
         doc.text(resumeContent, 10, 10);
 
-        // Save the generated PDF as "resume.pdf"
+        // Save the generated PDF with the name 'resume.pdf'
         doc.save("resume.pdf");
     });
 
