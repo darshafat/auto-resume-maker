@@ -49,13 +49,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // Capture the content of the resume (without HTML tags, using innerText)
+        // Get the content from the resume preview area (plain text)
         const resumeContent = document.getElementById("resumeContent").innerText;
 
-        // Add content to the PDF (text format)
+        // Use jsPDF to add the content to the PDF
         doc.text(resumeContent, 10, 10);
 
-        // Save the generated PDF
+        // Save the generated PDF as "resume.pdf"
         doc.save("resume.pdf");
     });
 
