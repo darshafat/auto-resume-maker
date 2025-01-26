@@ -4,44 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Resume Maker</title>
-    
-    <!-- Link to the jsPDF Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { max-width: 500px; margin: auto; }
+        label { display: block; margin: 10px 0 5px; }
+        input, textarea { width: 100%; padding: 8px; margin-bottom: 15px; }
+        button { padding: 10px 15px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        #resumePreview { margin-top: 20px; display: none; }
+        #downloadBtn { display: none; }
+    </style>
 </head>
 <body>
+    <h1>Simple Resume Maker</h1>
+    <form id="resumeForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
 
-    <div class="container">
-        <h1>Create Your Resume</h1>
-        
-        <form id="resumeForm">
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" placeholder="Your Name">
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="Your Email">
-            
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" placeholder="Your Phone">
-            
-            <label for="experience">Experience:</label>
-            <textarea id="experience" placeholder="Your Work Experience"></textarea>
-            
-            <label for="education">Education:</label>
-            <textarea id="education" placeholder="Your Education"></textarea>
-            
-            <label for="skills">Skills:</label>
-            <textarea id="skills" placeholder="Your Skills"></textarea>
+        <label for="fatherName">Father's Name:</label>
+        <input type="text" id="fatherName" placeholder="Enter your father's name" required>
 
-            <button type="submit">Generate Resume</button>
-        </form>
-        
-        <div id="resumePreview" class="resume-preview">
-            <h2>Resume Preview</h2>
-            <div id="resumeContent"></div>
-            <button id="downloadBtn" style="display:none;">Download as PDF</button>
-        </div>
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required>
+
+        <label for="address">Address:</label>
+        <textarea id="address" placeholder="Enter your address" required></textarea>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" placeholder="Enter your phone number" required>
+
+        <label for="experience">Experience:</label>
+        <textarea id="experience" placeholder="Describe your experience" required></textarea>
+
+        <label for="education">Education:</label>
+        <textarea id="education" placeholder="Enter your educational details" required></textarea>
+
+        <label for="skills">Skills:</label>
+        <textarea id="skills" placeholder="List your skills" required></textarea>
+
+        <button type="submit">Generate Resume</button>
+    </form>
+
+    <div id="resumePreview">
+        <h2>Resume Preview</h2>
+        <div id="resumeContent"></div>
+        <button id="downloadBtn">Download as PDF</button>
     </div>
 
     <script src="script.js"></script>
