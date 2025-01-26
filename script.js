@@ -15,11 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
         let education = document.getElementById("education").value;
         let skills = document.getElementById("skills").value;
 
+        // Format DOB to dd/mm/yyyy
+        let formattedDob = new Date(dob).toLocaleDateString('en-GB');
+
         // Create the resume preview
         let resumeContent = `
             <h3>${name}</h3>
             <p><strong>Father's Name:</strong> ${fatherName}</p>
-            <p><strong>Date of Birth:</strong> ${dob}</p>
+            <p><strong>Date of Birth:</strong> ${formattedDob}</p>
             <p><strong>Address:</strong> ${address}</p>
             <p><strong>Marital Status:</strong> ${maritalStatus}</p>
             <p><strong>Languages Known:</strong> ${languages}</p>
@@ -41,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // Add the resume content to the PDF
+        // Get user input values
         let name = document.getElementById("name").value;
         let fatherName = document.getElementById("fatherName").value;
         let dob = document.getElementById("dob").value;
@@ -54,9 +57,12 @@ document.addEventListener("DOMContentLoaded", function () {
         let education = document.getElementById("education").value;
         let skills = document.getElementById("skills").value;
 
+        // Format DOB to dd/mm/yyyy
+        let formattedDob = new Date(dob).toLocaleDateString('en-GB');
+
         doc.setFont("helvetica", "bold");
         doc.setFontSize(18);
-        doc.text("Resume", 105, 20, { align: "center" });
+        doc.text("RESUME", 105, 20, { align: "center" }); // Capitalize "RESUME"
 
         doc.setFontSize(14);
         doc.text("Name:", 10, 40);
@@ -71,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
         doc.setFont("helvetica", "bold");
         doc.text("Date of Birth:", 10, 60);
         doc.setFont("helvetica", "normal");
-        doc.text(dob, 50, 60);
+        doc.text(formattedDob, 50, 60);
 
         doc.setFont("helvetica", "bold");
         doc.text("Address:", 10, 70);
@@ -86,7 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
         doc.setFont("helvetica", "bold");
         doc.text("Languages Known:", 10, 100);
         doc.setFont("helvetica", "normal");
-        doc.text(languages, 50, 100, { maxWidth: 140 });
+        // Adjust text alignment and ensure it fits within the page
+        doc.text(languages, 50, 100, { maxWidth: 140, lineHeightFactor: 1.2 });
 
         doc.setFont("helvetica", "bold");
         doc.text("Email:", 10, 120);
