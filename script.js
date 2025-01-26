@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let fatherName = document.getElementById("fatherName").value;
         let dob = document.getElementById("dob").value;
         let address = document.getElementById("address").value;
+        let maritalStatus = document.getElementById("maritalStatus").value;
+        let languages = document.getElementById("languages").value;
         let email = document.getElementById("email").value;
         let phone = document.getElementById("phone").value;
         let experience = document.getElementById("experience").value;
@@ -19,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <p><strong>Father's Name:</strong> ${fatherName}</p>
             <p><strong>Date of Birth:</strong> ${dob}</p>
             <p><strong>Address:</strong> ${address}</p>
+            <p><strong>Marital Status:</strong> ${maritalStatus}</p>
+            <p><strong>Languages Known:</strong> ${languages}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Phone:</strong> ${phone}</p>
             <h4>Experience</h4>
@@ -42,42 +46,36 @@ document.addEventListener("DOMContentLoaded", function () {
         doc.setFontSize(18);
         doc.text("Resume", 105, 20, { align: "center" });
 
-        // Add name
         doc.setFontSize(14);
         doc.text("Name:", 10, 40);
         doc.setFont("helvetica", "normal");
         doc.text(document.getElementById("name").value, 50, 40);
 
-        // Add father's name
         doc.setFont("helvetica", "bold");
         doc.text("Father's Name:", 10, 50);
         doc.setFont("helvetica", "normal");
         doc.text(document.getElementById("fatherName").value, 50, 50);
 
-        // Add date of birth
         doc.setFont("helvetica", "bold");
         doc.text("Date of Birth:", 10, 60);
         doc.setFont("helvetica", "normal");
         doc.text(document.getElementById("dob").value, 50, 60);
 
-        // Add address
         doc.setFont("helvetica", "bold");
         doc.text("Address:", 10, 70);
         doc.setFont("helvetica", "normal");
         doc.text(document.getElementById("address").value, 50, 70, { maxWidth: 140 });
 
-        // Add email and phone
         doc.setFont("helvetica", "bold");
-        doc.text("Email:", 10, 90);
+        doc.text("Marital Status:", 10, 90);
         doc.setFont("helvetica", "normal");
-        doc.text(document.getElementById("email").value, 50, 90);
+        doc.text(document.getElementById("maritalStatus").value, 50, 90);
 
         doc.setFont("helvetica", "bold");
-        doc.text("Phone:", 10, 100);
+        doc.text("Languages Known:", 10, 100);
         doc.setFont("helvetica", "normal");
-        doc.text(document.getElementById("phone").value, 50, 100);
+        doc.text(document.getElementById("languages").value, 50, 100, { maxWidth: 140 });
 
-        // Add experience, education, and skills
         doc.setFont("helvetica", "bold");
         doc.text("Experience:", 10, 120);
         doc.setFont("helvetica", "normal");
@@ -93,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
         doc.setFont("helvetica", "normal");
         doc.text(document.getElementById("skills").value, 10, 190, { maxWidth: 190 });
 
-        // Save the PDF with a name
         doc.save("resume.pdf");
     });
 });
