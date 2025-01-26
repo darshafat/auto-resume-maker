@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <p><strong>Phone:</strong> ${phone}</p>
             <h4>Experience</h4>
             <p>${experience}</p>
-            <h4>Education</h4>
+            <h4>Educational Qualification</h4>
             <p>${education}</p>
             <h4>Skills</h4>
             <p>${skills}</p>
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         doc.text(experience, 10, 160, { maxWidth: 190 });
 
         doc.setFont("helvetica", "bold");
-        doc.text("Education:", 10, 180);
+        doc.text("Educational Qualification:", 10, 180);
         doc.setFont("helvetica", "normal");
         doc.text(education, 10, 190, { maxWidth: 190 });
 
