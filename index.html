@@ -1,69 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Resume Maker</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        form { max-width: 500px; margin: auto; }
-        label { display: block; margin: 10px 0 5px; }
-        input, textarea, select { width: 100%; padding: 8px; margin-bottom: 15px; }
-        button { padding: 10px 15px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
-        #resumePreview { margin-top: 20px; display: none; }
-        #downloadBtn { display: none; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Resume Maker (by Dar Shafat)</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #e3f2fd;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 800px;
+      margin: 30px auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      color: #1565c0;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #0d47a1;
+    }
+
+    input, textarea {
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #0d47a1;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #1565c0;
+    }
+  </style>
 </head>
 <body>
-    <h1>Simple Resume Maker</h1>
+  <div class="container">
+    <h1>Auto Resume Maker <br>(by Dar Shafat)</h1>
     <form id="resumeForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" placeholder="Enter your name" required>
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter your full name" required>
 
-        <label for="fatherName">Father's Name:</label>
-        <input type="text" id="fatherName" placeholder="Enter your father's name" required>
+      <label for="fathersName">Father's Name</label>
+      <input type="text" id="fathersName" placeholder="Enter your father's name" required>
 
-        <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob" required>
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" required>
 
-        <label for="address">Address:</label>
-        <textarea id="address" placeholder="Enter your address" required></textarea>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
 
-        <label for="maritalStatus">Marital Status:</label>
-        <select id="maritalStatus" required>
-            <option value="">Select</option>
-            <option value="Married">Married</option>
-            <option value="Unmarried">Unmarried</option>
-        </select>
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number" required>
 
-        <label for="languages">Languages Known:</label>
-        <textarea id="languages" placeholder="List the languages you know" required></textarea>
+      <label for="address">Address</label>
+      <textarea id="address" placeholder="Enter your address" rows="2" required></textarea>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" placeholder="Enter your email" required>
+      <label for="post">Applying for Post</label>
+      <input type="text" id="post" placeholder="Enter the post name" required>
 
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone" placeholder="Enter your phone number" required>
+      <label for="qualification">Educational Qualification</label>
+      <textarea id="qualification" placeholder="Enter your qualification" rows="2" required></textarea>
 
-        <label for="experience">Experience:</label>
-        <textarea id="experience" placeholder="Describe your experience" required></textarea>
+      <label for="experience">Experience</label>
+      <textarea id="experience" placeholder="Enter your work experience" rows="3" required></textarea>
 
-        <label for="education">Education:</label>
-        <textarea id="education" placeholder="Enter your educational details" required></textarea>
+      <label for="skills">Skills</label>
+      <textarea id="skills" placeholder="Enter your skills" rows="2" required></textarea>
 
-        <label for="skills">Skills:</label>
-        <textarea id="skills" placeholder="List your skills" required></textarea>
+      <label for="languages">Languages Known</label>
+      <textarea id="languages" placeholder="Enter known languages" rows="2" required></textarea>
 
-        <button type="submit">Generate Resume</button>
+      <button type="button" id="downloadBtn">Download PDF</button>
     </form>
+  </div>
 
-    <div id="resumePreview">
-        <h2>Resume Preview</h2>
-        <div id="resumeContent"></div>
-        <button id="downloadBtn">Download as PDF</button>
-    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script>
+    document.getElementById("downloadBtn").addEventListener("click", function () {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
 
-    <script src="script.js"></script>
+      // Get form data
+      const name = document.getElementById("name").value;
+      const fathersName = document.getElementById("fathersName").value;
+      const dob = document.getElementById("dob").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const address = document.getElementById("address").value;
+      const post = document.getElementById("post").value;
+      const qualification = document.getElementById("qualification").value;
+      const experience = document.getElementById("experience").value;
+      const skills = document.getElementById("skills").value;
+      const languages = document.getElementById("languages").value;
+
+      // Format date to DD-MM-YYYY
+      const formattedDob = new Date(dob).toLocaleDateString("en-GB");
+
+      // Add "RESUME" at the top
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(22);
+      doc.text("RESUME", 105, 20, { align: "center" });
+
+      // Personal Details Section
+      doc.setFontSize(14);
+      doc.text("Personal Details", 20, 40);
+      doc.setFontSize(12);
+
+      const details = [
+        { label: "Name", value: name },
+        { label: "Father's Name", value: fathersName },
+        { label: "Date of Birth", value: formattedDob },
+        { label: "Email", value: email },
+        { label: "Phone", value: phone },
+        { label: "Address", value: address },
+      ];
+
+      let yOffset = 50;
+      details.forEach((detail) => {
+        doc.setFont("Helvetica", "bold");
+        doc.text(`${detail.label}:`, 20, yOffset);
+        doc.setFont("Helvetica", "normal");
+        doc.text(detail.value, 70, yOffset, { maxWidth: 120 });
+        yOffset += 10;
+      });
+
+      // Add sections
+      const sections = [
+        { title: "Applying for Post", content: post },
+        { title: "Educational Qualification", content: qualification },
+        { title: "Experience", content: experience },
+        { title: "Skills", content: skills },
+        { title: "Languages Known", content: languages },
+      ];
+
+      sections.forEach((section) => {
+        doc.setFont("Helvetica", "bold");
+        doc.text(section.title, 20, yOffset);
+        doc.setFont("Helvetica", "normal");
+        doc.text(section.content, 25, yOffset + 10, { maxWidth: 160 });
+        yOffset += 20 + Math.ceil(doc.getTextDimensions(section.content).h);
+      });
+
+      // Footer
+      doc.setFontSize(10);
+      doc.setFont("Helvetica", "italic");
+      doc.text(
+        "Made with Auto Resume Maker by Dar Shafat ❤️",
+        105,
+        290,
+        { align: "center" }
+      );
+
+      // Save PDF
+      doc.save("resume.pdf");
+    });
+  </script>
 </body>
 </html>
