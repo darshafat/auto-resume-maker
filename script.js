@@ -31,32 +31,49 @@ document.addEventListener("DOMContentLoaded", function () {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // Get the content for the PDF
-        let name = document.getElementById("name").value;
-        let email = document.getElementById("email").value;
-        let phone = document.getElementById("phone").value;
-        let experience = document.getElementById("experience").value;
-        let education = document.getElementById("education").value;
-        let skills = document.getElementById("skills").value;
+        // Add styling and format the PDF content
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(18);
+        doc.text("Resume", 105, 20, { align: "center" });
 
-        // Format the content for the PDF
-        doc.setFont("helvetica", "normal");
+        // Add name
         doc.setFontSize(14);
-        doc.text(`Name: ${name}`, 10, 10);
-        doc.text(`Email: ${email}`, 10, 20);
-        doc.text(`Phone: ${phone}`, 10, 30);
+        doc.setFont("helvetica", "bold");
+        doc.text("Name:", 10, 40);
+        doc.setFont("helvetica", "normal");
+        doc.text(document.getElementById("name").value, 50, 40);
 
-        doc.setFontSize(12);
-        doc.text("Experience:", 10, 40);
-        doc.text(experience, 10, 50, { maxWidth: 180 });
+        // Add email
+        doc.setFont("helvetica", "bold");
+        doc.text("Email:", 10, 50);
+        doc.setFont("helvetica", "normal");
+        doc.text(document.getElementById("email").value, 50, 50);
 
-        doc.text("Education:", 10, 70);
-        doc.text(education, 10, 80, { maxWidth: 180 });
+        // Add phone
+        doc.setFont("helvetica", "bold");
+        doc.text("Phone:", 10, 60);
+        doc.setFont("helvetica", "normal");
+        doc.text(document.getElementById("phone").value, 50, 60);
 
-        doc.text("Skills:", 10, 100);
-        doc.text(skills, 10, 110, { maxWidth: 180 });
+        // Add experience
+        doc.setFont("helvetica", "bold");
+        doc.text("Experience:", 10, 80);
+        doc.setFont("helvetica", "normal");
+        doc.text(document.getElementById("experience").value, 10, 90, { maxWidth: 190 });
 
-        // Save the PDF with the name 'resume.pdf'
+        // Add education
+        doc.setFont("helvetica", "bold");
+        doc.text("Education:", 10, 110);
+        doc.setFont("helvetica", "normal");
+        doc.text(document.getElementById("education").value, 10, 120, { maxWidth: 190 });
+
+        // Add skills
+        doc.setFont("helvetica", "bold");
+        doc.text("Skills:", 10, 140);
+        doc.setFont("helvetica", "normal");
+        doc.text(document.getElementById("skills").value, 10, 150, { maxWidth: 190 });
+
+        // Save the PDF with a name
         doc.save("resume.pdf");
     });
 });
