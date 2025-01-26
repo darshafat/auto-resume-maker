@@ -1,11 +1,8 @@
-// Wait for the DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", function () {
-
-    // Resume form submission event
     document.getElementById("resumeForm").addEventListener("submit", function (e) {
-        e.preventDefault();  // Prevent the form from submitting
+        e.preventDefault();
 
-        // Get the user input values
+        // Get user input values
         let name = document.getElementById("name").value;
         let email = document.getElementById("email").value;
         let phone = document.getElementById("phone").value;
@@ -13,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let education = document.getElementById("education").value;
         let skills = document.getElementById("skills").value;
 
-        // Create the resume content
+        // Create the resume preview
         let resumeContent = `
             <h3>${name}</h3>
             <p>Email: ${email}</p>
@@ -25,38 +22,41 @@ document.addEventListener("DOMContentLoaded", function () {
             <h4>Skills</h4>
             <p>${skills}</p>
         `;
-
-        // Display the resume content in the preview
         document.getElementById("resumeContent").innerHTML = resumeContent;
-
-        // Show the resume preview section
         document.getElementById("resumePreview").style.display = "block";
-
-        // Show the download button
         document.getElementById("downloadBtn").style.display = "inline-block";
     });
 
-    // Function to generate PDF
     document.getElementById("downloadBtn").addEventListener("click", function () {
-
-        // Ensure jsPDF is correctly loaded
-        if (typeof jsPDF === 'undefined') {
-            alert("jsPDF is not loaded correctly.");
-            return;
-        }
-
-        // Create a new jsPDF instance
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // Capture the content of the resume (without HTML tags, using innerText)
-        const resumeContent = document.getElementById("resumeContent").innerText;
+        // Get the content for the PDF
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let phone = document.getElementById("phone").value;
+        let experience = document.getElementById("experience").value;
+        let education = document.getElementById("education").value;
+        let skills = document.getElementById("skills").value;
 
-        // Add the content to the PDF (text format)
-        doc.text(resumeContent, 10, 10);
+        // Format the content for the PDF
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(14);
+        doc.text(`Name: ${name}`, 10, 10);
+        doc.text(`Email: ${email}`, 10, 20);
+        doc.text(`Phone: ${phone}`, 10, 30);
 
-        // Save the generated PDF with the name 'resume.pdf'
+        doc.setFontSize(12);
+        doc.text("Experience:", 10, 40);
+        doc.text(experience, 10, 50, { maxWidth: 180 });
+
+        doc.text("Education:", 10, 70);
+        doc.text(education, 10, 80, { maxWidth: 180 });
+
+        doc.text("Skills:", 10, 100);
+        doc.text(skills, 10, 110, { maxWidth: 180 });
+
+        // Save the PDF with the name 'resume.pdf'
         doc.save("resume.pdf");
     });
-
 });
